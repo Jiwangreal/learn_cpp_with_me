@@ -110,26 +110,26 @@ Node* Parser::Factor()
             std::cout<<"missing parenthesis"<<std::endl;
             node = 0;
         }
-        else if (token == STATUS_NUMBER)
-        {
-            node = new NumberNode(scanner_.Number());//新建一个数字节点
-            scanner_.Accept();
-        }
-        else if(token == STATUS_MINUS)
-        {
-            scanner_.Accept();//接受一个负号，目的是指针偏移到下一个字符，让下一次的解析做准备
-            node = new UminusNode(Factor());//传递一个子节点进去，这个子节点就是因式
-        }
-        else
-        {   
-            status = STATUS_ERROR;
-            //to do:抛出异常
-            std::cout<<"Not a valid expression"<<std::endl;
-            node = 0;
-        }
-        
-        return node;
     }
+    else if (token == STATUS_NUMBER)
+    {
+        node = new NumberNode(scanner_.Number());//新建一个数字节点
+        scanner_.Accept();
+    }
+    else if(token == TOKEN_MINUS)
+    {
+        scanner_.Accept();//接受一个负号，目的是指针偏移到下一个字符，让下一次的解析做准备
+        node = new UminusNode(Factor());//传递一个子节点进去，这个子节点就是因式
+    }
+    else
+    {   
+        status = STATUS_ERROR;
+        //to do:抛出异常
+        std::cout<<"Not a valid expression"<<std::endl;
+        node = 0;
+    }
+    
+    return node;
 }
 
 

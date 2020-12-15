@@ -2,7 +2,9 @@
 #include "Scanner.h"//因为会使用到Scanner的一些接口进行扫描
 #include "Node.h"
 #include "Calc.h"
+#include "Exception.h"
 
+#include <cstring>
 #include <cassert>
 #include <iostream>
 
@@ -109,8 +111,9 @@ Node* Parser::Term()
         else
         {
             status_ = STATUS_ERROR;
-            std::cout<<"The left-hand side of an assignment must be a variable"<<std::endl;//必须是左值节点
+            // std::cout<<"The left-hand side of an assignment must be a variable"<<std::endl;//必须是左值节点
             //Todo 抛出异常
+            throw SyntaxError("The left-hand side of an assignment must be a variable");
         }
         
     }
@@ -123,10 +126,10 @@ Node* Parser::Factor()
     //or (Expression)
     Node* node = 0;
     EToken token = scanner_.Token();
-    if (token == TOKEN_LPARENTHESIS) 
+    if (token == TOKEN_LPARENTHESIS) //遇到左括号，说明是一个因式
     {
         scanner_.Accept(); //accept '('
-        node = Expr();//先解析表达式，右边应该有个右括号
+        node = Expr();//先解析表达式，判定它是否是一个项，右边应该有个右括号
         if (scanner_ == TOKEN_RPARENTHESIS)
         {
             scanner_.Accept(); //accept ')'
@@ -135,14 +138,15 @@ Node* Parser::Factor()
         {
             status = STATUS_ERROR;
             //to do:抛出异常
-            std::cout<<"missing parenthesis"<<std::endl;
+            // std::cout<<"missing parenthesis"<<std::endl;
+            throw SyntaxError("Missing parenthesis");
             node = 0;
         }
-    }
-    else if (token == STATUS_NUMBER)
-    {
-        node = new NumberNode(scanner_.Number());//新建一个数字节点
-        scanner_.Accept();
+        else if (token == STATUS_NUMBER)
+        {
+            node = new NumberNode(scanner_.Number());//新建一个数字节点
+            scanner_.Accept();
+        }
     }
     else if(token == TOKEN_MINUS)
     {
@@ -175,14 +179,18 @@ Node* Parser::Factor()
                 {
                     //输出不认识的函数
                     status_ = STATUS_ERROR;
-                    std::cout<<"Unknown function"<<"\""<<symbol<<"\""<<std::endl;
+                    // std::cout<<"Unknown function"<<"\""<<symbol<<"\""<<std::endl;
+                    char buf[256] = {0};
+                    sprintf(buf, "Unknow function \" %s \".", symbol.c_str());//symbol是string类型，
+                    throw SyntaxError(buf);
                 }
                 
             }
             else
             {
                 status_ = STATUS_ERROR;
-                std::cout<<"Missing paraenthesis in a function call."<<std::endl;
+                // std::cout<<"Missing paraenthesis in a function call."<<std::endl;
+                throw SyntaxError("Missing paraenthesis in a function call.");
             }
             
         }
@@ -199,10 +207,11 @@ Node* Parser::Factor()
     {   
         status = STATUS_ERROR;
         //to do:抛出异常
-        std::cout<<"Not a valid expression"<<std::endl;
+        // std::cout<<"Not a valid expression"<<std::endl;
+        throw SyntaxError("Not a valid expression");
         node = 0;
     }
-    
+        
     return node;
 }
 
