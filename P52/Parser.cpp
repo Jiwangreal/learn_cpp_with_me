@@ -142,11 +142,11 @@ Node* Parser::Factor()
             throw SyntaxError("Missing parenthesis");
             node = 0;
         }
-        else if (token == STATUS_NUMBER)
-        {
-            node = new NumberNode(scanner_.Number());//新建一个数字节点
-            scanner_.Accept();
-        }
+    }
+    else if (token == TOKEN_NUMBER)
+    {
+        node = new NumberNode(scanner_.Number());//新建一个数字节点
+        scanner_.Accept();
     }
     else if(token == TOKEN_MINUS)
     {
