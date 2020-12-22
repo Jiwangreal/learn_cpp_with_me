@@ -155,7 +155,7 @@ public:
 private:
     //有很多子代，将其放入向量中
     std::vector<Node*> childs_;
-    std::vector<bool> positive;//节点的正负性
+    std::vector<bool> positive_;//节点的正负性
 };
 
 class SumNode : public : MultipleNode

@@ -31,7 +31,7 @@ int main(void)
                     std::cout<<paese.Calculate()<<std::endl;
                 }
             }
-            catch (SyntaxException& se)//派生类的异常
+            catch (SyntaxError& se)//派生类的异常
             {
                 std::cout<<se.what()<<std::endl;
                 // std::cout<<se.StackTrace()<<std::endl;//发生异常时，可以将栈的调用关系给打印出来，只做演示说明，所以加上了注释

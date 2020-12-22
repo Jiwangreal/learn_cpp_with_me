@@ -31,7 +31,7 @@ int main(void)
                     std::cout<<paese.Calculate()<<std::endl;
                 }
             }
-            catch (SyntaxException& se)//派生类的异常
+            catch (SyntaxError& se)//派生类的异常
             {
                 status = STATUS_QUIT;//为了检查内存泄漏
                 std::cout<<se.what()<<std::endl;
