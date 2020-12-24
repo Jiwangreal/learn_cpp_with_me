@@ -85,7 +85,7 @@ Node* Parser::Term()
     if (token == TOKEN_MULTIPLY || token == TOKEN_DIVIDE)
     {
         //此时的表达式，Expr ：= Factor{ ( '*'| '/' ) Factor}
-        MultipleNode* multipleNode = New SumNode(node);
+        MultipleNode* multipleNode = New ProductNode(node);
         //子节点有多个，所以用循环
         do
         {
