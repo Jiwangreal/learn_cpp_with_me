@@ -24,6 +24,7 @@ Parser::Parser(Scanner& scanner, Calc& calc)
 （1）在Parser.h中包含Node.h
 （2）将析构函数的实现放到cpp文件中
 */
+//告警的解决办法
 Parser::~Parser()
 {
     // delete tree_;//如果tree_是空指针，则不会调用void operator delete(void*p)

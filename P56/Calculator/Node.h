@@ -161,7 +161,7 @@ public:
     ~MultipleNode();
 private:
     //有很多子代，将其放入向量中
-    std::vector<Node*> childs_;
+    std::vector<Node*> childs_;//vector里面存放的是Node*
     std::vector<bool> positive_;//节点的正负性
 };
 

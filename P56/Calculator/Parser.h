@@ -25,7 +25,14 @@ class Parser
 {
 public:
     Parser(Scanner& scanner, Calc& calc);
-    ~Parser();
+
+    //没有提供析构函数，则编译器提供析构函数，编译器提供的构造函数是内联的：即在头文件这里直接给出析构函数
+    //而析构函数要负责std::auto_ptr<Node> tree_;auto_ptr对象的释放，当它释放时，会调用它所持有的对象Node*对象的释放
+    //编译器发现class Node;的Node是不完全声明，前向声明，即在这里~Parser() {}，并不知道Node的析构函数，所以在这里出现了这种警告
+    // ~Parser() {}//在头文件这边给出析构函数与编译器提供的空的析构函数是一样的，函数体在头文件中直接给出，是内联的
+                //解决办法就是在cpp文件中给出这个析构函数，但是没有实现
+    ~Parser();//告警的解决办法
+    // ~Parser();
     STATUS Parse();
     std::auto_ptr<Node> Expr();//将Node*改为智能指针： std::auto_ptr<Node>
     std::auto_ptr<Node> Term();
