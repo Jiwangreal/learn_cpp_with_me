@@ -8,9 +8,9 @@ class Calc;
 
 enum STATUS
 {
-    STATUS_OK;
-    STATUS_ERROR;
-    STATUS_QUIT;
+    STATUS_OK,
+    STATUS_ERROR,
+    STATUS_QUIT
 };
 
 

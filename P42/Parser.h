@@ -7,9 +7,9 @@ class Node;//解决在 Node* Expr();中没有定义Node
 
 enum STATUS
 {
-    STATUS_OK;
-    STATUS_ERROR;
-    STATUS_QUIT;
+    STATUS_OK,
+    STATUS_ERROR,
+    STATUS_QUIT
 };
 
 
