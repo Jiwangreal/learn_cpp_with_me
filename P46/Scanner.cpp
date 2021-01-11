@@ -31,7 +31,7 @@ void Scanner::SkipWhite()
 void Scanner::Accept()
 {
     SkipWhite();//Ê×ÏÈºöÂÔ¿Õ°××Ö·û
-    switch (buf[curPos_])
+    switch (buf_[curPos_])
     {
     case '+':
         token_ = TOKEN_ADD;
