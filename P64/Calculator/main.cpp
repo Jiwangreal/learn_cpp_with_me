@@ -26,9 +26,10 @@ int main(void)
         {
             //下面仅仅是解析表达式，是个表达式的解析器，还需要一个命令解析器
             //判断是否是一个命令，若是命令，就用命令解析器解析他
-            if (scanner.IsCommand())
+            //eg:!quit
+            if (scanner.IsCommand())//解析！
             {
-                CommandParser Parser(scanner, calc);
+                CommandParser Parser(scanner, calc);//解析quit
                 status = parser.Execute();
             }
             else

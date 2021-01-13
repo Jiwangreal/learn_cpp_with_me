@@ -28,6 +28,7 @@ public:
 
     bool IsDone() const;
     bool IsCommand() const;
+    void AcceptCommand();
     void Accept();
     bool IsEmpty() const;
     double Number() const;

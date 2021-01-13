@@ -147,3 +147,17 @@ void Scanner::Accept()
         break;
     }
 }
+
+
+
+void Scanner::AcceptCommand()
+{
+    ReadChar();//抹除掉!s filename中间的空格
+    symbol_.erase();//将当前symbol_erase
+    while (!isspace(look_))
+    {
+        symbol_ + = look_;//filename保存在symbol_中了
+        look_ = in.get();
+    }
+
+}
