@@ -156,7 +156,7 @@ Node* Parser::Factor()
         std::string symbol = scanner_.GetSymbol();
         unsigned int id = calc_.FindSymbol(symbol);
         scanner_.Accept();
-        if (id == SymbolTable::IDNOTFOUND)
+        if (id == SymbolTable::INNOTFOUND)
         {
             id = calc_.AddSymbol(symbol);
         }

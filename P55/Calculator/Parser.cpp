@@ -188,7 +188,7 @@ Node* Parser::Factor()
             {
                 scanner_.Accept(); //是否是一个右括号，若是则接受它
                 //找到一个符号，判定它是否是一个合法的函数
-                if (id != SymbolTable::IDNOTFOUND && calc_.isFunction(id))//解析到一个符号symbol，它是一个函数，并且函数在函数表中
+                if (id != SymbolTable::INNOTFOUND && calc_.isFunction(id))//解析到一个符号symbol，它是一个函数，并且函数在函数表中
                 {
                     //将4+5作为他的孩子
                     //GetFunction获取函数指针，到底是哪一个函数
@@ -215,7 +215,7 @@ Node* Parser::Factor()
         }
         else
         {
-            if (id == SymbolTable::IDNOTFOUND)
+            if (id == SymbolTable::INNOTFOUND)
             {
                 id = calc_.AddSymbol(symbol);
             }
