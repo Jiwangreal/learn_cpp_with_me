@@ -3,12 +3,14 @@
 
 #include <exception>
 
+//Stack是一个模板，并不是一个类
+//typename T:将类型作为参数来传递，typename T是类型参数
 template <typename T>
 class Stack
 {
 public:
     //分配一个T类型的连续内存空间
-    Stack(int maxsize);
+    explicit Stack(int maxsize);
     ~Stack();
     void Push(const T& elem);
     void Pop();
