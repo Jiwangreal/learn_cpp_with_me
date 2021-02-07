@@ -10,7 +10,7 @@ void DrawAllShapes(const vector<Shape*>& v)
     vector<Square*>::const_iterator it;
     for (it=v.begin(); it!=v.end(); ++it)
     {
-        (*it)->draw();
+        (*it)->Draw();
     }
 }
 

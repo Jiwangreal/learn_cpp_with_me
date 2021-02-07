@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include "FunctionTable.h"
+#include "ptr_vector.h"
 
 class Storage;
 
@@ -155,13 +156,20 @@ public:
     }
     void AppendChild(std::auto_ptr<Node>& node, bool positive)
     {
-        childs_.push_back(node.release());//元素类型是Node*,不能放入智能指针，而应该放入原生指针:释放所有权后传进容器中
-        child_.push_back(positive);
+        //存在push_back的时候，operator new失败，可能存在风险
+        //智能指针（原生指针）node.release()释放了所有权之后就是1个裸指针，原生指针还没有插入到向量中，operator new分配内存就出现了异常
+        //此时，裸指针还没有插入到向量中，即使析构函数~MultipleNode();调用了，也没办法遍历出来，将其释放掉，
+        //那么指针所指向的内存就出现了泄漏
+        //解决办法是，使用ptr_vector
+        // childs_.push_back(node.release());//元素类型是Node*,不能放入智能指针，而应该放入原生指针:释放所有权后传进容器中
+        childs_.push_back(node);//可以放入智能指针的原因是：因为重载了push_back方法
+        positive_.push_back(positive);
     }
     ~MultipleNode();
-private:
+protected:
     //有很多子代，将其放入向量中
-    std::vector<Node*> childs_;//vector里面存放的是Node*
+    // std::vector<Node*> childs_;//vector里面存放的是Node*
+    ptr_vector<Node*> childs_;
     std::vector<bool> positive_;//节点的正负性
 };
 

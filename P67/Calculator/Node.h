@@ -156,7 +156,7 @@ public:
     void AppendChild(std::auto_ptr<Node>& node, bool positive)
     {
         childs_.push_back(node.release());//元素类型是Node*,不能放入智能指针，而应该放入原生指针:释放所有权后传进容器中
-        child_.push_back(positive);
+        positive_.push_back(positive);
     }
     ~MultipleNode();
 private:

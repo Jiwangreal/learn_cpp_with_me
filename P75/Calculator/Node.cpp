@@ -67,12 +67,12 @@ double UnaryNode::Calc() const
 
 MultipleNode::~MultipleNode()
 {
-    std::vector<Node*>::const_iterator it;
-    for (it = children_.begin(); it != children_.end(); ++it)
-    {
-        //it实际上是Node*的指针的指针，它存放的类型是Node*，*it取出它里面存放的元素Node*
-        delete *it;
-    }
+    // std::vector<Node*>::const_iterator it;
+    // for (it = children_.begin(); it != children_.end(); ++it)
+    // {
+    //     //it实际上是Node*的指针的指针，它存放的类型是Node*，*it取出它里面存放的元素Node*
+    //     delete *it;
+    // }
 }
 
 //把它的子节点计算一下，然后把它+起来

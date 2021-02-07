@@ -64,7 +64,7 @@ void DrawAllShapes(const vector<Shape*>& v)
         //it存放的是Shape*的指针，*it就是Shape*这个指针类型
         //基类指针*it指向派生类对象，会调用派生类的虚函数Draw
         //这里以一致的观点来看待不同的派生类对象
-        (*it)->draw();
+        (*it)->Draw();
     }
 }
 

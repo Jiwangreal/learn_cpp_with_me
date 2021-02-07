@@ -121,7 +121,7 @@ public:
     void AppendChild(Node* child, bool positive)
     {
         childs_.push_back(child);
-        child_.push_back(positive);
+        positive_.push_back(positive);
     }
     ~MultipleNode();
 private:

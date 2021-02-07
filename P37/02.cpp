@@ -64,12 +64,12 @@ int main(void)
     if (typeid(Circle).name() == typeid(*p).name())
     {
         cout<<"p is point to a Circle object"<<endl;
-        ((Circle*)p)->draw();
+        ((Circle*)p)->Draw();
     }
     else if (typeid(Square).name() == typeid(*p).name())
     {
         cout<<"p is point to a Square object"<<endl;
-        ((Square*)p)->draw();
+        ((Square*)p)->Draw();
         //((Square*)p)这种C风格的强转会做一些对齐操作，而reinterpret_cast是不会做任何对齐操作的
     }
     else
