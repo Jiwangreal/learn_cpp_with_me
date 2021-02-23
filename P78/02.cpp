@@ -29,6 +29,20 @@ int main(void)
         cout<<*it<<' ';
     cout<<endl;
 
+    //min_element是全局函数，在区间范围内求最小元素的位置
+    it = min_element(v.begin(),v.end());
+    //如果区间为空，可能找不到，所以要判定
+    if (it != v.end())
+    {
+        cout << *it <<endl;
+    }
+    
+    it = max_element(v.begin(),v.end());
+    if (it != v.end())
+    {
+        cout << *it <<endl;
+    }
+
     return 0;
 
 }
