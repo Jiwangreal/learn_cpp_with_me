@@ -35,7 +35,7 @@ class IsEqualId
 {
 public:
     IsEqualId(unsigned int id) : id_(id) {}
-    bool operator(const std::pair<std::string,unsigned int>& it) const
+    bool operator(const std::pair<const std::string,unsigned int>& it) const
     {
         return it.second == id_;
     }
@@ -48,7 +48,7 @@ std::string SymbolTable::GetSymbolName(unsigned int id) const
 {
     //find_if(XX,XX,类)
     //将类传递进去，将类看成是一个函数
-    map<const std::string, unsigned>::const_iterator it;
+    map<const std::string, unsigned int>::const_iterator it;
     it = find_if(dictionary_begin(), dictionary_end(), IsEqualId(id));
 
     //没有找到的时候，抛出一个异常
