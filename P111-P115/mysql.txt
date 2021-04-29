@@ -1,0 +1,165 @@
+第二十三讲
+create table t_emp(empno int, ename varchar(20), esex char(2));
+
+alter table t_emp modify ename varchar(30);
+
+alter table t_emp drop esex;
+
+alter table t_emp add esex char(2);
+
+insert into t_emp(empno, ename, esex) values(1000, 'tom', 'm');
+
+insert into t_emp values(1000, 'maggie', 'f');
+
+insert into t_emp(empno, ename) values(1002, 'john');
+
+insert into t_emp(empno, ename, esex) values(1003, null, 'm');
+
+insert into t_emp values(1004, '张三', '男');
+
+show variables like 'character_set%';
+
+set names gbk;
+
+update t_emp set empno=1001 where ename='maggie';
+
+delete from t_emp where esex is null;
+
+delete from t_emp;
+
+第二十四讲
+create table t_emp(empno int not null primary key, ename varchar(20), esex char(2));
+
+create table t_emp(empno int, ename varchar(20), esex char(2), primary key (empno));
+
+create table t_emp(empno int, ename varchar(20), esex char(2), constraint PK_EMPNO primary key(empno));
+
+create table t_emp(empno int, ename varchar(20), esex char(2));
+
+alter table t_emp add constraint PK_EMPNO primary key(empno);
+
+insert into t_emp values(1000, 'john', 'm');
+
+insert into t_emp values(1000, 'lily', 'f');
+
+insert into t_emp values(null, 'lily', 'f');
+
+
+create table t_emp(empno int, deptno int, ename varchar(20), esex char(2));
+
+alter table t_emp add constraint PK_EMPNO primary key(empno);
+
+create table t_dept(deptno int, dname varchar(20));
+
+alter table t_dept add constraint PK_DEPTNO primary key(deptno);
+
+alter table t_emp add constraint FK_DEPTNO foreign key(deptno) references t_dept(deptno);
+
+set names gbk;
+insert into t_dept values(2001, '人事部');
+insert into t_dept values(2002, '技术部');
+
+insert into t_emp values(1001, 2001, 'john', 'm');
+
+insert into t_emp values(1003, 2003, 'john', 'm');
+
+
+
+create table t_test1(id int auto_increment primary key, name varchar(30), age int default 20);
+
+insert into t_test1 values(null, 'aaa');
+
+insert into t_test1 values(null, 'aaa', null);
+
+insert into t_test1 (name) values( 'bbb');
+
+
+
+
+create table t_test2(id int, name varchar(30), age int);
+alter table t_test2 add constraint CC_AGE check (age >=18 and age<=60);
+
+alter table t_test2 add constraint CC_AGE check (length(name)>2);
+
+第二十五讲
+
+create table t_number(a tinyint, b tinyint unsigned);
+insert into t_number values(100, 200);
+insert into t_number values(-129, 200);
+insert into t_number values(128, 200);
+insert into t_number values(127, 200);
+insert into t_number values(127, -1);
+
+create table t_number2(a int(4) zerofill);
+insert into t_number2 values(123);
+insert into t_number2 values(123456);
+
+create table t_number3(a bool);
+
+create table t_number4(a float, b double);
+insert into t_number4 values(12345678.12345, 12345678.12345);
+insert into t_number4 values(12345678.12345, 123456789123456789.12345);
+insert into t_number4 values(12345678.12345, 12345678912345.12345);
+
+
+create table t_number5(a double(5,2));
+-999.99 ~999.99
+
+create table t_number6(a decimal(30,6));
+insert into t_number6 values(123456789123456789.12345);
+create table t_number7(a decimal(5,2));
+-999.99 ~999.99
+
+
+第二十六讲
+create table t_datetime(a datetime);
+
+insert into t_datetime values('2014-01-15 10:10:10');
+insert into t_datetime values('9999-12-31 23:59:59');
+insert into t_datetime values('10000-01-01 00:00:00');
+insert into t_datetime values('999-01-01 00:00:00');
+insert into t_datetime values('99-01-01 00:00:00');
+insert into t_datetime values('69-01-01 00:00:00');
+
+
+create table t_timestamp(a timestamp);
+insert into t_timestamp values('2014-01-15 10:10:10');
+insert into t_timestamp values('2038-01-19 03:14:07');
+insert into t_timestamp values('2038-01-19 03:14:08');
+insert into t_timestamp values('2038-01-19 11:14:07');
+insert into t_timestamp values('2038-01-19 11:14:08');
+
+create table t_date(a date);
+insert into t_date values('2012-01-01');
+
+create table t_time(a time);
+insert into t_time values('23:12:12');
+insert into t_time values('823:12:12');
+insert into t_time values('3 23:12:12');
+
+create table t_year(a year);
+insert into t_year values (2000);
+insert into t_year values ('2155');
+insert into t_year values (2156);
+
+第二十七讲
+
+create table t_varchar(a varchar(65535));		// 不能创建成功
+create table t_varchar(a varchar(21845));		// 不能创建成功
+create table t_varchar(a varchar(21844));
+
+
+create table t_enum(sex enum('male', 'female'));
+insert into t_enum values('male');
+insert into t_enum values('female');
+insert into t_enum values('other');
+insert into t_enum values(1);
+select sex+0 from t_enum;
+
+
+create table t_set(favourite set('dog', 'cat', 'bird'));
+insert into t_set values('dog,cat');
+insert into t_set values('dog,bird');
+select favourite+0 from t_set;
+
+
